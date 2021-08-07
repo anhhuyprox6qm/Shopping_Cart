@@ -1,0 +1,29 @@
+<?php
+
+use App\Http\Controllers\LayoutDemoController;
+use App\Http\Controllers\PaypalIPNListener;
+use App\Http\Controllers\ProductController;
+use App\Http\Controllers\ShoppingCartController;
+use Illuminate\Support\Facades\Route;
+
+/*
+|--------------------------------------------------------------------------
+| Web Routes
+|--------------------------------------------------------------------------
+|
+| Here is where you can register web routes for your application. These
+| routes are loaded by the RouteServiceProvider within a group which
+| contains the "web" middleware group. Now create something great!
+|
+*/
+Route::get('/demo/layout/table', [LayoutDemoController::class, 'displayTable']);
+Route::get('/demo/layout/form', [LayoutDemoController::class, 'displayForm']);
+Route::get('/demo/layout/master', [LayoutDemoController::class, 'displayLayout']);
+Route::get('create',[ProductController::class,'create']);
+Route::post('create',[ProductController::class,'store']);
+Route::get('list',[ProductController::class,'index']);
+Route::get('add',[ShoppingCartController::class,'add']);
+Route::get('show',[ShoppingCartController::class,'show']);
+Route::get('remove',[ShoppingCartController::class,'remove']);
+Route::post('save',[ShoppingCartController::class,'save']);
+Route::post('/paypal/ipn', [PaypalIPNListener::class, 'listenToIPN']);
